@@ -23,7 +23,7 @@ int days_in_month(int month, int year) {
 }
 
 
-// ­pºâ¬Y¤é´Á¨ì 0000/1/1 ªºÁ`¤Ñ¼Æ
+// å¾žå…¬å…ƒ 0 å¹´ 1 æœˆ 1 æ—¥é–‹å§‹è¨ˆç®—çš„å¤©æ•¸
 int days_from_origin(int year, int month, int day) {
     int days = 0;
     for (int y = 0; y < year; y++) {
@@ -38,15 +38,15 @@ int days_from_origin(int year, int month, int day) {
 
 int main() {
     struct Date person1, person2;
-    printf("½Ð¿é¤J²Ä¤@­Ó¤Hªº¥Í¤é(¨Ò¦p:James 2010 5 20):\n");
+    printf("è«‹è¼¸å…¥ç¬¬ä¸€ä½çš„è³‡è¨Š(James 2010 5 20):\n");
     scanf("%s %d %d %d", person1.name, &person1.year, &person1.month, &person1.day);
-    printf("½Ð¿é¤J²Ä¤G­Ó¤Hªº¥Í¤é(¨Ò¦p:Doris 2012 4 20):\n");
+    printf("è«‹è¼¸å…¥ç¬¬äºŒä½çš„è³‡è¨Š(Doris 2012 4 20):\n");
     scanf("%s %d %d %d", person2.name, &person2.year, &person2.month, &person2.day);
 
     int days1 = days_from_origin(person1.year, person1.month, person1.day);
     int days2 = days_from_origin(person2.year, person2.month, person2.day);
     int distance = days1 > days2 ? days1 - days2 : days2 - days1;
 
-    printf("%s ©M %s ¤§¶¡ªº¥Í¤é¤Ñ¼Æ®t %d ¤Ñ\n", person1.name, person2.name, distance);
+    printf("%s å’Œ %s ä¹‹é–“ç›¸éš” %d å¤©\n", person1.name, person2.name, distance);
     return 0;
 }

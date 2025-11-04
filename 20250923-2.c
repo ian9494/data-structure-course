@@ -27,11 +27,12 @@ int main() {
     
     // 讀取數據並計算總分與平均（同一行多筆資料）
     char buffer[4096];
-    fgets(buffer, sizeof(buffer), file);
-    char *p = buffer;
+    fgets(buffer, sizeof(buffer), file); // 讀取整個檔案內容到buffer
+    char *p = buffer; // 將P指向buffer的起始位置
     while (1) {
+        // 從P位置讀取一組學生資料
         int n = sscanf(p, "%d %s %f %f %f", &students[count].ID, students[count].name, &students[count].grades.chinese, &students[count].grades.english, &students[count].grades.math);
-        if (n != 5) break;
+        if (n != 5) break; // 如果讀取不到5個欄位，表示結束
         students[count].grades.sum = students[count].grades.chinese + students[count].grades.english + students[count].grades.math;
         students[count].grades.average = students[count].grades.sum / 3.0;
         count++;
@@ -46,7 +47,7 @@ int main() {
     }
     fclose(file);
 
-    // 計算排名
+    // 計算排名，利用bubble sort的兩次迴圈概念 分數少的排名數字大
     for (int i = 0; i < count; i++) {
         students[i].grades.rank = 1;
         for (int j = 0; j < count; j++) {
