@@ -1,7 +1,7 @@
-//±N¿é¤Jªº10­Ó¥H¤º¼Æ¦rÂà´«¦¨2,8,16¶i¦ì ¶i¦ì¼Æ¥i¿é¤J¦Û¿ï
+//å°‡è¼¸å…¥çš„10å€‹ä»¥å…§æ•¸å­—è½‰æ›æˆ2,8,16é€²ä½ é€²ä½æ•¸å¯è¼¸å…¥è‡ªé¸
 #include <stdio.h>
 
-// ±N¦r¤¸°}¦C¶i¦æ®ğªw±Æ§Ç
+// å°‡å­—å…ƒé™£åˆ—é€²è¡Œæ°£æ³¡æ’åº
 void swapArray(char arr[], int n) {
     for(int i = 0; i < n - 1; ++i) {
         int swapped = 0;
@@ -19,7 +19,7 @@ void swapArray(char arr[], int n) {
     }
 }
 
-// ¦L¥X©Ò¦³ 1 ³Ì¤Öªº¦C¡]1-based¡^¡A¨C­Ó¦æ¸¹¤À¦æ
+// å°å‡ºæ‰€æœ‰ 1 æœ€å°‘çš„åˆ—ï¼ˆ1-basedï¼‰ï¼Œæ¯å€‹è¡Œè™Ÿåˆ†è¡Œ
 void rowMinAll(char arr[10][33], int n) {
     int minCount = 33;
     int ones[10] = {0};
@@ -33,7 +33,7 @@ void rowMinAll(char arr[10][33], int n) {
     }
     for(int i = 0; i < n; i++) {
         if(ones[i] == minCount) {
-            printf("1¼Æ¶q³Ì¤Ö¬°²Ä %d ¦æ\n", i+1);
+            printf("1æ•¸é‡æœ€å°‘ç‚ºç¬¬ %d è¡Œ\n", i+1);
         }
     }
 }
@@ -41,50 +41,50 @@ void rowMinAll(char arr[10][33], int n) {
 int main(){
     int num, base;
 
-    printf("½Ğ¿é¤J¾ã¼Æªº­Ó¼Æ(10­Ó¥H¤º):");
+    printf("è«‹è¼¸å…¥æ•´æ•¸çš„å€‹æ•¸(10å€‹ä»¥å…§):");
     scanf("%d", &num);
     if(num > 10 || num <= 0){
-        printf("¿é¤J¼Æ¶q¶W¥X³Ì¤j­È\n");
+        printf("è¼¸å…¥æ•¸é‡è¶…å‡ºæœ€å¤§å€¼\n");
         return 1;
     }
 
     int arr[10];
-    printf("½Ğ¿é¤J%d­Ó¾ã¼Æ:\n", num);
+    printf("è«‹è¼¸å…¥%då€‹æ•´æ•¸:\n", num);
     for(int i = 0; i < num; i++){
         scanf("%d", &arr[i]);
     }
 
-    printf("½Ğ¿é¤J­nÂà´«ªº¶i¦ì(2,8,16):");
+    printf("è«‹è¼¸å…¥è¦è½‰æ›çš„é€²ä½(2,8,16):");
     scanf("%d", &base);
     if(base != 2 && base != 8 && base != 16){
-        printf("µL®Äªº¶i¦ì¼Æ¡A½Ğ¿é¤J2¡B8©Î16¡C\n");
+        printf("ç„¡æ•ˆçš„é€²ä½æ•¸ï¼Œè«‹è¼¸å…¥2ã€8æˆ–16ã€‚\n");
         return 1;
     }
 
-    //±N¼Æ¦rÂà´«¬°«ü©w¶i¦ì¨Ã¿é¥X¦Ü¤Gºû°}¦C 
-    char result[10][33]; //°²³]³Ì¤j32¦ì¤¸¥[¤Wµ²§ô²Å¸¹
+    //å°‡æ•¸å­—è½‰æ›ç‚ºæŒ‡å®šé€²ä½ä¸¦è¼¸å‡ºè‡³äºŒç¶­é™£åˆ— 
+    char result[10][33]; //å‡è¨­æœ€å¤§32ä½å…ƒåŠ ä¸ŠçµæŸç¬¦è™Ÿ
     for(int i = 0; i < num; i++){
         if(base == 2){
-            //Âà´«¬°¤G¶i¦ì
+            //è½‰æ›ç‚ºäºŒé€²ä½
             for(int j = 31; j >= 0; j--){
                 if (arr[i] % 2 == 1)
                     result[i][j] = '1';
                 else
                     result[i][j] = '0';
-                arr[i] = arr[i] / 2; //©Î arr[i] >>= 1;
+                arr[i] = arr[i] / 2; //æˆ– arr[i] >>= 1;
             }
-            result[i][32] = '\0'; //µ²§ô²Å¸¹
+            result[i][32] = '\0'; //çµæŸç¬¦è™Ÿ
 
         } else if(base == 8){
-            //Âà´«¬°¤K¶i¦ì
+            //è½‰æ›ç‚ºå…«é€²ä½
             for(int j = 31; j >= 0; j--){
                 result[i][j] = (arr[i] % 8) + '0';
                 arr[i] = arr[i] / 8;
             }
-            result[i][32] = '\0'; //µ²§ô²Å¸¹
+            result[i][32] = '\0'; //çµæŸç¬¦è™Ÿ
 
         } else if(base == 16){
-            //Âà´«¬°¢Ì¤»¶i¦ì
+            //è½‰æ›ç‚ºåå…­é€²ä½
             for(int j = 31; j >= 0; j--){
                 int remainder = arr[i] % 16;
                 if(remainder < 10)
@@ -93,28 +93,28 @@ int main(){
                     result[i][j] = (remainder - 10) + 'A';
                 arr[i] = arr[i] / 16;
             }
-            result[i][32] = '\0'; //µ²§ô²Å¸¹
+            result[i][32] = '\0'; //çµæŸç¬¦è™Ÿ
         }
     }
 
-    // ¿é¥Xµ²ªG¡]¥h°£«e¾É¹s¡^
+    // è¼¸å‡ºçµæœï¼ˆå»é™¤å‰å°é›¶ï¼‰
     int countZero[10] = {0};
     for(int i = 0; i < num; i++){
-        // §ä¨ì²Ä¤@­Ó«D¹s¦ì¼Æ
+        // æ‰¾åˆ°ç¬¬ä¸€å€‹éé›¶ä½æ•¸
         int start = 0;
         while(result[i][start] == '0' && start < 31) {
             start++;
         }
-        // ¬ö¿ı«e¾É¹sªº¼Æ¶q¡A¤è«K±Æ§Ç«á¿é¥X
+        // ç´€éŒ„å‰å°é›¶çš„æ•¸é‡ï¼Œæ–¹ä¾¿æ’åºå¾Œè¼¸å‡º
         countZero[i] = start;
-        printf("¼Æ¦r %d Âà´«¬° %d ¶i¦ì¬O: %s\n", arr[i], base, &result[i][start]);
+        printf("æ•¸å­— %d è½‰æ›ç‚º %d é€²ä½æ˜¯: %s\n", arr[i], base, &result[i][start]);
     }
 
-    printf("\n¹B§@ªºµ²ªG¦p¤U:\n");
+    printf("\né‹ä½œçš„çµæœå¦‚ä¸‹:\n");
 
     for(int i = 0; i < num; i++){
         swapArray(result[i], 32);
-        // ±Æ§Ç«á«e­±ªº0·|¤@°_³Q¸õ¹L¡A©Ò¥Hª½±µ¥ÎcountZero¨Ó©w¦ì
+        // æ’åºå¾Œå‰é¢çš„0æœƒä¸€èµ·è¢«è·³éï¼Œæ‰€ä»¥ç›´æ¥ç”¨countZeroä¾†å®šä½
         int start = countZero[i];
         printf("%s\n", &result[i][start]);
     }

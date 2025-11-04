@@ -23,7 +23,7 @@ int days_in_month(int month, int year) {
 }
 
 
-// 從公元 0 年 1 月 1 日開始計算的天數
+// 計算某日期到 0000/1/1 的總天數
 int days_from_origin(int year, int month, int day) {
     int days = 0;
     for (int y = 0; y < year; y++) {

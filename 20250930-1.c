@@ -2,12 +2,12 @@
 
 struct struct1 {
     struct struct1 *prev; 
-    int coef; // ¶µªº«Y¼Æ
-    int exp;  // ¶µªº«ü¼Æ
+    int coef; // é …çš„ä¿‚æ•¸
+    int exp;  // é …çš„æŒ‡æ•¸
     struct struct1 *next;
 };
 
-// «Ø¥ß¦h¶µ¦¡¸`ÂI
+// å»ºç«‹å¤šé …å¼ç¯€é»
 struct struct1* createNode(int coef, int exp) {
     struct struct1* node = (struct struct1*)malloc(sizeof(struct struct1));
     node->coef = coef;
@@ -17,7 +17,7 @@ struct struct1* createNode(int coef, int exp) {
     return node;
 }
 
-// ´¡¤J¸`ÂI¨ì¦h¶µ¦¡Ãìµ²¦ê¦C¡]«ö­°¾­±Æ¦C¡^
+// æ’å…¥ç¯€é»åˆ°å¤šé …å¼éˆçµä¸²åˆ—ï¼ˆæŒ‰é™å†ªæ’åˆ—ï¼‰
 void insertNode(struct struct1** head, int coef, int exp) {
     struct struct1* newNode = createNode(coef, exp);
     if (*head == NULL) {
@@ -27,25 +27,25 @@ void insertNode(struct struct1** head, int coef, int exp) {
     struct struct1* curr = *head;
     struct struct1* prev = NULL;
 
-    // §ä¨ì´¡¤J¦ì¸m ­Y ²{¦bªº¸`ÂI«ü¼Æ¤p©óµ¥©ó´¡¤Jªº«ü¼Æ¡A«h´¡¤J¦b«e­±
+    // æ‰¾åˆ°æ’å…¥ä½ç½® è‹¥ ç¾åœ¨çš„ç¯€é»æŒ‡æ•¸å°æ–¼ç­‰æ–¼æ’å…¥çš„æŒ‡æ•¸ï¼Œå‰‡æ’å…¥åœ¨å‰é¢
     while (curr && curr->exp > exp) {
         prev = curr;
         curr = curr->next;
     }
 
-    // ­Y«ü¼Æ¬Û¦P¡A«h«Y¼Æ¬Û¥[
+    // è‹¥æŒ‡æ•¸ç›¸åŒï¼Œå‰‡ä¿‚æ•¸ç›¸åŠ 
     if (curr && curr->exp == exp) {
         curr->coef += coef;
         free(newNode);
         return;
     }
 
-    // ´¡¤J¸`ÂI
+    // æ’å…¥ç¯€é»
     if (prev == NULL) {
         newNode->next = *head;
         (*head)->prev = newNode;
         *head = newNode;
-    // ´¡¤J¦b¤¤¶¡©Î§À³¡
+    // æ’å…¥åœ¨ä¸­é–“æˆ–å°¾éƒ¨
     } else {
         newNode->next = curr;
         newNode->prev = prev;
@@ -54,7 +54,7 @@ void insertNode(struct struct1** head, int coef, int exp) {
     }
 }
 
-// ¦h¶µ¦¡¥[ªk¡GC = A + B
+// å¤šé …å¼åŠ æ³•ï¼šC = A + B
 struct struct1* addPoly(struct struct1* A, struct struct1* B) {
     struct struct1* C = NULL;
     struct struct1* pa = A;
@@ -70,7 +70,7 @@ struct struct1* addPoly(struct struct1* A, struct struct1* B) {
     return C;
 }
 
-// Âà´«¦¨Àôª¬¡]¸ê®Æµ²ºc2¡^
+// è½‰æ›æˆç’°ç‹€ï¼ˆè³‡æ–™çµæ§‹2ï¼‰
 struct struct1* convertToCircular(struct struct1* head) {
     if (!head) return NULL;
 
@@ -83,7 +83,7 @@ struct struct1* convertToCircular(struct struct1* head) {
     return head;
 }
 
-// ¿é¥X¦h¶µ¦¡
+// è¼¸å‡ºå¤šé …å¼
 void printPoly(struct struct1* head, char name) {
     struct struct1* curr = head;
     printf("%c = ", name);
@@ -101,7 +101,7 @@ void printPoly(struct struct1* head, char name) {
 }
 
 
-// ¿é¥X°}¦C
+// è¼¸å‡ºé™£åˆ—
 void printArray(int arr[][2], int size) {
     for (int i = 0; i < size; i++) {
         printf("%d %d\n", arr[i][0], arr[i][1]);
@@ -109,7 +109,7 @@ void printArray(int arr[][2], int size) {
 }
 
 int main() {
-    // ½d¨Ò¡GA(x) = 3x^4 + 2x^2 + 1
+    // ç¯„ä¾‹ï¼šA(x) = 3x^4 + 2x^2 + 1
     //      B(x) = 5x^3 + 2x^2 + 4
     struct struct1* A = NULL;
     struct struct1* B = NULL;
@@ -121,7 +121,7 @@ int main() {
     insertNode(&B, 9, 1);
     insertNode(&B, 1, 0);
 
-    // ¿é¥X¦h¶µ¦¡ A ©M B
+    // è¼¸å‡ºå¤šé …å¼ A å’Œ B
     printPoly(A, 'A');
     printPoly(B, 'B');
     struct struct1* C = addPoly(A, B);
@@ -129,10 +129,13 @@ int main() {
 
     int arr[20][2];
     int size = 0;
-    convertToCircular(C, arr, &size);
+    convertToCircular(C);
+    struct struct1* curr = C;
 
+    // è¼¸å‡ºé™£åˆ—
+    printArray(arr, size);
 
-    // ÄÀ©ñ°O¾ĞÅé
+    // é‡‹æ”¾è¨˜æ†¶é«”
     struct struct1* curr;
     while (A) { curr = A; A = A->next; free(curr); }
     while (B) { curr = B; B = B->next; free(curr); }

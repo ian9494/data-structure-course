@@ -23,13 +23,14 @@ int main()
     return 0;
 }
 
-// returns average of array elements, minimum and maximum element
+// 回傳平均值、最大值、最小值
 void calculateNum(int arr[100], int arrLen, float *avg, int *min, int *max)
 {
     int i, sum = 0;
     *min = arr[0];
     *max = arr[0];
 
+    // 遍歷陣列 利用指標紀錄最大值、最小值、總和
     for (i = 0; i < arrLen; i++)
     {
         sum += arr[i];

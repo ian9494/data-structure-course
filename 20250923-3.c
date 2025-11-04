@@ -16,24 +16,24 @@ int main() {
 
     while (1) {
 
-        printf("\n\n¥D¿ï³æ:\n"
-           "1. ¸ü¤J product.txt ÀÉ®×\n"
-           "2. Åã¥Ü©Ò¦³²£«~¸ê®Æ\n"
-           "3. ·s¼W²£«~¸ê®Æ¨ì¦ê¦CÀY\n"
-           "4. ·s¼W²£«~¸ê®Æ¨ì¦ê¦C§À\n"
-           "5. §R°£²£«~¸ê®Æ\n"
-           "6. ¥H¤ÏÂà¦ê¦CÅã¥Ü©Ò¦³²£«~¸ê®Æ\n"
-           "0. Â÷¶}\n"
-           "½Ğ¿é¤J±zªº¿ï¾Ü> ");
+        printf("\n\nä¸»é¸å–®:\n"
+           "1. è¼‰å…¥ product.txt æª”æ¡ˆ\n"
+           "2. é¡¯ç¤ºæ‰€æœ‰ç”¢å“è³‡æ–™\n"
+           "3. æ–°å¢ç”¢å“è³‡æ–™åˆ°ä¸²åˆ—é ­\n"
+           "4. æ–°å¢ç”¢å“è³‡æ–™åˆ°ä¸²åˆ—å°¾\n"
+           "5. åˆªé™¤ç”¢å“è³‡æ–™\n"
+           "6. ä»¥åè½‰ä¸²åˆ—é¡¯ç¤ºæ‰€æœ‰ç”¢å“è³‡æ–™\n"
+           "0. é›¢é–‹\n"
+           "è«‹è¼¸å…¥æ‚¨çš„é¸æ“‡> ");
         scanf("%d", &choice);
 
         switch (choice) {
         case 1:
-            // ¶×¤Jproduct.txt
+            // åŒ¯å…¥product.txt
             FILE *file = fopen("product.txt", "r");
             if (file == NULL) {
                 perror("fopen");
-                printf("µLªk¶}±ÒÀÉ®×\n");
+                printf("ç„¡æ³•é–‹å•Ÿæª”æ¡ˆ\n");
                 return 1;
             }
 
@@ -42,12 +42,12 @@ int main() {
             int total = 0, skipped = 0;
             while (1) {
                 struct product *new_product = malloc(sizeof(struct product));
-                // Åª¨ú³r¸¹¤À¹j®æ¦¡
+                // è®€å–é€—è™Ÿåˆ†éš”æ ¼å¼
                 if (fscanf(file, "%d, %[^,], %f, %d, %*f", &new_product->ID, new_product->name, &new_product->price, &new_product->stock) != 4) {
                     free(new_product);
                     break;
                 }
-                // ÀË¬d­«½ÆID
+                // æª¢æŸ¥é‡è¤‡ID
                 int duplicate = 0;
                 struct product *cur = head;
                 while (cur != NULL) {
@@ -58,7 +58,7 @@ int main() {
                     cur = cur->next;
                 }
                 if (duplicate) {
-                    printf("­«½Æªº²£«~½s¸¹: %03d¡]%s¡^¡A¸õ¹L²Ä %d µ§¸ê®Æ\n", new_product->ID, new_product->name, total + skipped + 1);
+                    printf("é‡è¤‡çš„ç”¢å“ç·¨è™Ÿ: %03dï¼ˆ%sï¼‰ï¼Œè·³éç¬¬ %d ç­†è³‡æ–™\n", new_product->ID, new_product->name, total + skipped + 1);
                     free(new_product);
                     skipped++;
                     continue;
@@ -72,27 +72,27 @@ int main() {
                     tail->next = new_product;
                     tail = new_product;
                 }
-                // tail §ó·s¡]½T«O tail «ü¦V³Ì«á¤@­Ó¸`ÂI¡^
+                // tail æ›´æ–°ï¼ˆç¢ºä¿ tail æŒ‡å‘æœ€å¾Œä¸€å€‹ç¯€é»ï¼‰
                 struct product *tmp = head;
                 while (tmp->next != NULL) tmp = tmp->next;
                 tail = tmp;
 
                 total++;
             }
-            printf("¤w±qÀÉ®×¸ü¤J²£«~¸ê®Æ¡A¦@ %d µ§¡C\n", total);
+            printf("å·²å¾æª”æ¡ˆè¼‰å…¥ç”¢å“è³‡æ–™ï¼Œå…± %d ç­†ã€‚\n", total);
             if (skipped > 0) {
-                printf("¡]¦³ %d µ§­«½Æ¸ê®Æ³Q¸õ¹L¡^\n", skipped);
+                printf("ï¼ˆæœ‰ %d ç­†é‡è¤‡è³‡æ–™è¢«è·³éï¼‰\n", skipped);
             }
             break;
         
         case 2:
-            // Åã¥Ü©Ò¦³²£«~¸ê®Æ
+            // é¡¯ç¤ºæ‰€æœ‰ç”¢å“è³‡æ–™
             if (head == NULL) {
-                printf("¥Ø«e¨S¦³¥ô¦ó²£«~¸ê®Æ¡C\n");
+                printf("ç›®å‰æ²’æœ‰ä»»ä½•ç”¢å“è³‡æ–™ã€‚\n");
                 break;
             } else {
                 struct product *current = head;
-                printf("½s¸¹\t¦WºÙ\t»ù®æ\t¼Æ¶q\tÁ`ª÷ÃB\n");
+                printf("ç·¨è™Ÿ\tåç¨±\tåƒ¹æ ¼\tæ•¸é‡\tç¸½é‡‘é¡\n");
                 while (current != NULL) {
                     printf("%03d\t%s\t$%.2f\t%d\t$%.2f\n", current->ID, current->name, current->price, current->stock, current->total_price);
                     current = current->next;
@@ -100,17 +100,17 @@ int main() {
             }
             break;
         case 3:
-            // ·s¼W²£«~¸ê®Æ¨ì¦ê¦CÀY
+            // æ–°å¢ç”¢å“è³‡æ–™åˆ°ä¸²åˆ—é ­
             {
                 struct product *new_product = malloc(sizeof(struct product));
                 
-                printf("½Ğ¿é¤J²£«~½s¸¹: ");
+                printf("è«‹è¼¸å…¥ç”¢å“ç·¨è™Ÿ: ");
                 scanf("%d", &new_product->ID);
-                printf("½Ğ¿é¤J²£«~¦WºÙ: ");
+                printf("è«‹è¼¸å…¥ç”¢å“åç¨±: ");
                 scanf("%s", new_product->name);
-                printf("½Ğ¿é¤J²£«~»ù®æ: ");
+                printf("è«‹è¼¸å…¥ç”¢å“åƒ¹æ ¼: ");
                 scanf("%f", &new_product->price);
-                printf("½Ğ¿é¤J²£«~¼Æ¶q: ");
+                printf("è«‹è¼¸å…¥ç”¢å“æ•¸é‡: ");
                 scanf("%d", &new_product->stock);
 
                 new_product->total_price = new_product->price * new_product->stock;
@@ -120,17 +120,17 @@ int main() {
             break;
         
         case 4:
-            // ·s¼W²£«~¸ê®Æ¨ì¦ê¦C§À
+            // æ–°å¢ç”¢å“è³‡æ–™åˆ°ä¸²åˆ—å°¾
             {
                 struct product *new_product = malloc(sizeof(struct product));
                 
-                printf("½Ğ¿é¤J²£«~½s¸¹: ");
+                printf("è«‹è¼¸å…¥ç”¢å“ç·¨è™Ÿ: ");
                 scanf("%d", &new_product->ID);
-                printf("½Ğ¿é¤J²£«~¦WºÙ: ");
+                printf("è«‹è¼¸å…¥ç”¢å“åç¨±: ");
                 scanf("%s", new_product->name);
-                printf("½Ğ¿é¤J²£«~»ù®æ: ");
+                printf("è«‹è¼¸å…¥ç”¢å“åƒ¹æ ¼: ");
                 scanf("%f", &new_product->price);
-                printf("½Ğ¿é¤J²£«~¼Æ¶q: ");
+                printf("è«‹è¼¸å…¥ç”¢å“æ•¸é‡: ");
                 scanf("%d", &new_product->stock);
 
                 new_product->total_price = new_product->price * new_product->stock;
@@ -143,7 +143,7 @@ int main() {
                     tail->next = new_product;
                     tail = new_product;
                 }
-                // tail §ó·s¡]½T«O tail «ü¦V³Ì«á¤@­Ó¸`ÂI¡^
+                // tail æ›´æ–°ï¼ˆç¢ºä¿ tail æŒ‡å‘æœ€å¾Œä¸€å€‹ç¯€é»ï¼‰
                 struct product *tmp = head;
                 while (tmp->next != NULL) tmp = tmp->next;
                 tail = tmp;
@@ -151,17 +151,17 @@ int main() {
             break;
         
         case 5:
-            // §R°£²£«~¸ê®Æ
+            // åˆªé™¤ç”¢å“è³‡æ–™
             {
                 int delete_id;
-                printf("½Ğ¿é¤J­n§R°£ªº²£«~½s¸¹: ");
+                printf("è«‹è¼¸å…¥è¦åˆªé™¤çš„ç”¢å“ç·¨è™Ÿ: ");
                 scanf("%d", &delete_id);
 
                 struct product *current = head;
                 struct product *previous = NULL;
 
                 if (head == NULL) {
-                    printf("¥Ø«e¨S¦³¥ô¦ó²£«~¥i¥H§R°£¡C\n");
+                    printf("ç›®å‰æ²’æœ‰ä»»ä½•ç”¢å“å¯ä»¥åˆªé™¤ã€‚\n");
                     break;
                 }
 
@@ -171,24 +171,24 @@ int main() {
                 }
 
                 if (current == NULL) {
-                    printf("§ä¤£¨ì½s¸¹¬° %03d ªº²£«~¡C\n", delete_id);
+                    printf("æ‰¾ä¸åˆ°ç·¨è™Ÿç‚º %03d çš„ç”¢å“ã€‚\n", delete_id);
                 } else {
                     if (previous == NULL) {
-                        head = current->next; // §R°£ªº¬OÀY¸`ÂI
+                        head = current->next; // åˆªé™¤çš„æ˜¯é ­ç¯€é»
                     } else {
-                        previous->next = current->next; // §R°£¤¤¶¡©Î§À¸`ÂI
+                        previous->next = current->next; // åˆªé™¤ä¸­é–“æˆ–å°¾ç¯€é»
                     }
                     free(current);
-                    printf("¤w§R°£½s¸¹¬° %d ªº²£«~¡C\n", delete_id);
+                    printf("å·²åˆªé™¤ç·¨è™Ÿç‚º %d çš„ç”¢å“ã€‚\n", delete_id);
                     break;
                 }
             }
             break;
         case 6:
-            // ¥H¤ÏÂà¦ê¦CÅã¥Ü©Ò¦³²£«~¸ê®Æ
+            // ä»¥åè½‰ä¸²åˆ—é¡¯ç¤ºæ‰€æœ‰ç”¢å“è³‡æ–™
             {
                 if (head == NULL) {
-                    printf("¥Ø«e¨S¦³¥ô¦ó²£«~¸ê®Æ¡C\n");
+                    printf("ç›®å‰æ²’æœ‰ä»»ä½•ç”¢å“è³‡æ–™ã€‚\n");
                     break;
                 }
 
@@ -204,9 +204,9 @@ int main() {
                 }
                 head = prev;
 
-                // Åã¥Ü¤ÏÂà«áªº¦ê¦C
+                // é¡¯ç¤ºåè½‰å¾Œçš„ä¸²åˆ—
                 current = head;
-                printf("½s¸¹\t¦WºÙ\t»ù®æ\t¼Æ¶q\tÁ`ª÷ÃB\n");
+                printf("ç·¨è™Ÿ\tåç¨±\tåƒ¹æ ¼\tæ•¸é‡\tç¸½é‡‘é¡\n");
                 while (current != NULL) {
                     printf("%03d\t%s\t$%.2f\t%d\t$%.2f\n", current->ID, current->name, current->price, current->stock, current->total_price);
                     current = current->next;
@@ -215,19 +215,19 @@ int main() {
             break;
         
         case 0:    
-            // Â÷¶}
-            printf("¥¿¦bÂ÷¶}...\n");
-            // ÄÀ©ñ°O¾ĞÅé
+            // é›¢é–‹
+            printf("æ­£åœ¨é›¢é–‹...\n");
+            // é‡‹æ”¾è¨˜æ†¶é«”
             while (head != NULL) {
                 struct product *temp = head;
                 head = head->next;
                 free(temp);
             }
-            printf("µ{¦¡µ²§ô¡A©Ò¦³¤À°t°O¾ĞÅé¤wÄÀ©ñ¡C\n");
+            printf("ç¨‹å¼çµæŸï¼Œæ‰€æœ‰åˆ†é…è¨˜æ†¶é«”å·²é‡‹æ”¾ã€‚\n");
             return 0;
 
         default:
-            printf("µL®Äªº¿ï¾Ü¡A½Ğ­«·s¿é¤J¡C \n");
+            printf("ç„¡æ•ˆçš„é¸æ“‡ï¼Œè«‹é‡æ–°è¼¸å…¥ã€‚ \n");
             break;
         }
     }
